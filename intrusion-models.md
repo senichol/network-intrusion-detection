@@ -1984,38 +1984,87 @@ for(i in 1:length(protocol.service.summ[, 1])) {
 }
 
 protocol.service.summ[!empty.rows, ] %>%
-kable(format = 'latex', caption = "Protocol, Service, Flag Observations by Cluster") %>%
+kable(format = 'html', caption = "Protocol, Service, Flag Observations by Cluster") %>%
   kable_styling("striped") %>%
   group_rows("Protocol, Service, Flag", 1, 6) %>%
   add_header_above(c(" " = 1, "Clusters" = 6))
 ```
 
-\begin{table}
-
-\caption{\label{tab:unnamed-chunk-18}Protocol, Service, Flag Observations by Cluster}
-\centering
-\begin{tabular}[t]{l|r|r|r|r|r|r}
-\hline
-\multicolumn{1}{c|}{ } & \multicolumn{6}{|c}{Clusters} \\
-\cline{2-7}
-  & 1 & 2 & 3 & 4 & 5 & 6\\
-\hline
-\multicolumn{7}{l}{\textbf{Protocol, Service, Flag}}\\
-\hline
-\hspace{1em}tcp:ftp:SF & 0 & 0 & 0 & 0 & 33 & 0\\
-\hline
-\hspace{1em}tcp:ftp\_data:SF & 0 & 0 & 0 & 37 & 0 & 30\\
-\hline
-\hspace{1em}tcp:http:RSTR & 0 & 0 & 65 & 0 & 0 & 0\\
-\hline
-\hspace{1em}tcp:http:S0 & 0 & 33 & 0 & 0 & 0 & 0\\
-\hline
-\hspace{1em}tcp:http:S3 & 0 & 0 & 2 & 0 & 0 & 0\\
-\hline
-\hspace{1em}udp:private:SF & 100 & 0 & 0 & 0 & 0 & 0\\
-\hline
-\end{tabular}
-\end{table}
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>Protocol, Service, Flag Observations by Cluster</caption>
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="text-align:center; border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;" colspan="6"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Clusters</div></th>
+</tr>
+<tr>
+<th style="text-align:left;">   </th>
+   <th style="text-align:right;"> 1 </th>
+   <th style="text-align:right;"> 2 </th>
+   <th style="text-align:right;"> 3 </th>
+   <th style="text-align:right;"> 4 </th>
+   <th style="text-align:right;"> 5 </th>
+   <th style="text-align:right;"> 6 </th>
+  </tr>
+</thead>
+<tbody>
+<tr grouplength="6"><td colspan="7" style="border-bottom: 1px solid;"><strong>Protocol, Service, Flag</strong></td></tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> tcp:ftp:SF </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> tcp:ftp_data:SF </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> tcp:http:RSTR </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> tcp:http:S0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> tcp:http:S3 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1"> udp:private:SF </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
 
 
 **Cluster Attribute Measurements**

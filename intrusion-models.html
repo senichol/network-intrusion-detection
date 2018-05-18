@@ -1849,11 +1849,193 @@ for(i in 1:length(protocol.service.summ[, 1])) {
 }
 
 protocol.service.summ[!empty.rows, ] %&gt;%
-kable(format = 'latex', caption = &quot;Protocol, Service, Flag Observations by Cluster&quot;) %&gt;%
+kable(format = 'html', caption = &quot;Protocol, Service, Flag Observations by Cluster&quot;) %&gt;%
   kable_styling(&quot;striped&quot;) %&gt;%
   group_rows(&quot;Protocol, Service, Flag&quot;, 1, 6) %&gt;%
   add_header_above(c(&quot; &quot; = 1, &quot;Clusters&quot; = 6))</code></pre>
-
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+Protocol, Service, Flag Observations by Cluster
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="text-align:center; border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;" colspan="6">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Clusters
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="6">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>Protocol, Service, Flag</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+tcp:<a href="ftp:SF" class="uri">ftp:SF</a>
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+tcp:ftp_<a href="data:SF" class="uri">data:SF</a>
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+tcp:<a href="http:RSTR" class="uri">http:RSTR</a>
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+tcp:<a href="http:S0" class="uri">http:S0</a>
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+tcp:<a href="http:S3" class="uri">http:S3</a>
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+<a href="udp:private:SF" class="uri">udp:private:SF</a>
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Cluster Attribute Measurements</strong></p>
 <p>There is significant overlap in the Protocols, Services and Flags observed within each cluster. Furthermore, important features such as Duration and Source/Destination Bytes that distinguished Intrusions from Benign Sessions in our histograms above are fairly consistent within these 6 clusters.</p>
 <p><strong>Flag significance:</strong></p>

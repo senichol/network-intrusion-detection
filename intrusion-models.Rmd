@@ -1872,7 +1872,7 @@ for(i in 1:length(protocol.service.summ[, 1])) {
 }
 
 protocol.service.summ[!empty.rows, ] %>%
-kable(format = 'latex', caption = "Protocol, Service, Flag Observations by Cluster") %>%
+kable(format = 'html', caption = "Protocol, Service, Flag Observations by Cluster") %>%
   kable_styling("striped") %>%
   group_rows("Protocol, Service, Flag", 1, 6) %>%
   add_header_above(c(" " = 1, "Clusters" = 6))
