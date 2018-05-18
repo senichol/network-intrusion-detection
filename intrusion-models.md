@@ -730,7 +730,7 @@ multiplot(hist.protocol,
           cols=2)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 **Review of Protocol, Service and Flag Distributions**
 
@@ -779,7 +779,7 @@ multiplot(hist.duration,
           cols=2)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 **Review of Duration, Source Bytes and Destination Bytes Distributions**
@@ -834,7 +834,7 @@ net.cor.rank %>%
         axis.title.x = element_text(angle = 0, hjust =0.5, face = "bold"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 
 **Interpretation of 1-to-1 Correlation for Intrusion Indicator**
@@ -931,7 +931,7 @@ test.vals %>%
   scale_colour_discrete(name = "Test/Train Data", breaks = c(0:1), labels = c("Test", "Train"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ```r
 test.vals %>%
@@ -955,7 +955,7 @@ test.vals %>%
   scale_colour_discrete(name = "Test/Train Data", breaks = c(0:1), labels = c("Test", "Train"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
 
 
 **KNN Model:  Selecting a K Value**
@@ -1047,7 +1047,7 @@ tpr.metrics %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=5, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ```r
 fpr.metrics <- select(k.metrics.summary, 
@@ -1071,7 +1071,7 @@ fpr.metrics %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=-2, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
 
 ```r
 acc.metrics <- select(k.metrics.summary, contains("model" , ignore.case = TRUE), contains("acc" , ignore.case = TRUE))
@@ -1093,7 +1093,7 @@ acc.metrics %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=15.0, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-8-3.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-8-3.png)<!-- -->
 
 **Model Evaluation**
 
@@ -1233,7 +1233,7 @@ acc.metrics %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=4, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ```r
 acc.metrics <- select(k.metrics.summary, 
@@ -1256,7 +1256,7 @@ acc.metrics %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=4, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
 
 
 
@@ -1274,16 +1274,16 @@ print(k.metrics)
 
 ```
 ##    tpr        fpr       acc  precision recall
-## 1    1 0.07167235 0.9300000 0.25000000      1
-## 2    1 0.07744108 0.9233333 0.11538462      1
-## 3    1 0.08361204 0.9166667 0.03846154      1
-## 4  NaN 0.12666667 0.8733333 0.00000000    NaN
-## 5  NaN 0.12000000 0.8800000 0.00000000    NaN
-## 6    1 0.07382550 0.9266667 0.08333333      1
-## 7    1 0.05743243 0.9433333 0.19047619      1
-## 8  NaN 0.13000000 0.8700000 0.00000000    NaN
-## 9  NaN 0.10666667 0.8933333 0.00000000    NaN
-## 10   1 0.08783784 0.9133333 0.13333333      1
+## 1    1 0.08474576 0.9166667 0.16666667      1
+## 2    1 0.06101695 0.9400000 0.21739130      1
+## 3    1 0.06462585 0.9366667 0.24000000      1
+## 4  NaN 0.10333333 0.8966667 0.00000000    NaN
+## 5  NaN 0.11000000 0.8900000 0.00000000    NaN
+## 6  NaN 0.11000000 0.8900000 0.00000000    NaN
+## 7  NaN 0.12333333 0.8766667 0.00000000    NaN
+## 8    1 0.08695652 0.9133333 0.03703704      1
+## 9    1 0.08474576 0.9166667 0.16666667      1
+## 10 NaN 0.10333333 0.8966667 0.00000000    NaN
 ```
 
 
@@ -1322,7 +1322,7 @@ pca.variances[1:10, ] %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.3f", ..y..)), vjust=-2.0, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 cum.pca.variances <- data.frame(Cumulative_Variance = cumsum(pca.variances$Explained_Variance), 
@@ -1343,7 +1343,7 @@ cum.pca.variances %>%
   geom_hline(aes(yintercept = 0.8), linetype = "dashed")
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
 
 **PCA Explained Variance Analysis**
 
@@ -1374,7 +1374,7 @@ component.weights %>%
         plot.title = element_text(hjust = 0.5, face = 'bold'))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 component.weights %>%
@@ -1394,7 +1394,7 @@ component.weights %>%
         plot.title = element_text(hjust = 0.5, face = 'bold'))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
 **Interpretation of PCA Component Weights**
 
 Intrusion events are represented by 1 and Benign Session events are represented by 0.
@@ -1426,7 +1426,7 @@ net_traffic %>%
   facet_wrap(~ is_intrusion)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 
 
@@ -1537,7 +1537,7 @@ acc.metrics %>%
   facet_wrap(~ model)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 **PCA Dimension Reduction**
 
@@ -1574,7 +1574,7 @@ test.vals %>%
   scale_colour_discrete(name = "Test/Train Data", breaks = c(0:1), labels = c("Test", "Train"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 ```r
 test.vals %>%
@@ -1598,7 +1598,7 @@ test.vals %>%
   scale_colour_discrete(name = "Test/Train Data", breaks = c(0:1), labels = c("Test", "Train"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
 
 **KNN Model:  Selecting a K Value**
 
@@ -1630,7 +1630,7 @@ k.metrics.summary %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=8.0, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 ```r
 k.metrics.summary %>%
@@ -1654,7 +1654,7 @@ k.metrics.summary %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=-10.0, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-2.png)<!-- -->
 
 ```r
 k.metrics.summary %>%
@@ -1678,7 +1678,7 @@ k.metrics.summary %>%
   stat_summary(fun.y = identity, geom="text", aes(label=sprintf("%0.4f", ..y..)), vjust=15.0, size = 4)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-3.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-3.png)<!-- -->
 
 ```r
 k.preds %>%
@@ -1701,7 +1701,7 @@ x$roc %>%
         plot.subtitle = element_text(hjust = 0.5, face = "italic"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-4.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-4.png)<!-- -->
 
 ```r
 k.preds %>%
@@ -1724,7 +1724,7 @@ x$roc %>%
         plot.subtitle = element_text(hjust = 0.5, face = "italic"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-5.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-5.png)<!-- -->
 
 ```r
 k.preds %>%
@@ -1747,7 +1747,7 @@ x$roc %>%
         plot.subtitle = element_text(hjust = 0.5, face = "italic"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-6.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-6.png)<!-- -->
 
 ```r
 k.preds %>%
@@ -1770,7 +1770,7 @@ x$roc %>%
         plot.subtitle = element_text(hjust = 0.5, face = "italic"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-7.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-7.png)<!-- -->
 
 ```r
 k.preds %>%
@@ -1793,7 +1793,7 @@ x$roc %>%
         plot.subtitle = element_text(hjust = 0.5, face = "italic"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-16-8.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-16-8.png)<!-- -->
 
 
 **Model Evaluation - Using PCA Components as Inputs**
@@ -1860,7 +1860,7 @@ cluster <- hclust(dist(is_transformed[,c(4:13,15:41)]))
 plot(cluster)
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 
 **Hierarchical Clustering Discussion**
@@ -1933,7 +1933,7 @@ summary %>%
         legend.title = element_text(hjust = 0.5, face = "bold"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 ```r
 summary %>%
@@ -1953,7 +1953,7 @@ summary %>%
         legend.title = element_text(hjust = 0.5, face = "bold"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-18-2.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-18-2.png)<!-- -->
 
 ```r
 summary %>%
@@ -1973,7 +1973,7 @@ summary %>%
         legend.title = element_text(hjust = 0.5, face = "bold"))
 ```
 
-![](Progress_ScottNicholson_files/figure-html/unnamed-chunk-18-3.png)<!-- -->
+![](intrusion-models_files/figure-html/unnamed-chunk-18-3.png)<!-- -->
 
 ```r
 protocol.service.summ <- with(is,table(protocol_type:service:flag, cluster))
