@@ -52,18 +52,18 @@ We evaluate the performance of KNN, Logistic Regression, Naive Bayes, Support Ve
 We conclude with suggestions for next steps in deploying and enhancing the XYZ Bank network intrusion detection model with consideration given to practical difficulties and opportunities to enhance the model accuracy and capabilities through the collection of new data.
 
 
-## Introduction {.tabset .tabset-fade .tabset-pills}
+## Introduction 
 
 ### Loading the data and re-naming variables
 I will assume for this part that the user has file saved in the working directory. This will load the data and rename the columns to something more useful.
 
 
 ```r
-setwd("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data")
+setwd("C:/Users/nicho/network-intrusion-detection")
 
 # First we will grab the data from 'network_traffic.csv.' I'll assume the file is saved in the user's working directory.
 
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic <- droplevels(net_traffic)
 net_traffic <- transform(net_traffic,
@@ -72,7 +72,7 @@ net_traffic <- transform(net_traffic,
 # so I'm removing them from 'net_traffic'
 zeroattributes <- c(7:9, 11, 15, 20, 21)
 net_traffic <- net_traffic[, -zeroattributes]
-# Re-coding values based on the data descriptions provided
+# Re-coding values based on the data descriptions provided for plotting
 net_traffic <- transform(net_traffic, is_intrusion = mapvalues(is_intrusion, 
                                                                c(0, 1), 
                                                                c("Benign Session", "Intrusion")),
@@ -95,6 +95,24 @@ net_traffic <- transform(net_traffic, is_intrusion = mapvalues(is_intrusion,
 
 
 ```r
+################################################################################
+##
+## Produces data summary, including:
+## Filename and data dimensions
+## Numeric data: mean, sd, missing
+## Symbolic data: arity, top-3, missing
+## 
+## Returns:  
+##   Object <- NULL 
+##   Print <- Numeric and Symbolic data summary
+##
+## Inputs:
+##   y <- REQUIRED.  File name, used for labeling the data summary
+##   x <- optional.  Name of a data frame.  Overrides the y-value for the data 
+##   source, but not the data summary label.
+##
+################################################################################
+
 brief <- function(y = NULL, x = NULL) {
   if(is.null(x)) {x <- read.csv(y)} 
   else{y = y}
@@ -145,7 +163,23 @@ brief <- function(y = NULL, x = NULL) {
   print(as.data.frame(symbolic_attributes))
 }
 
-#logistic regression
+################################################################################
+##
+## Returns data frame (ncol = 3)  containing Logistic Regression model predictions
+## and an indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
+
+
 get_pred_logit<-function(train,test,train.review = FALSE){
   nf<-ncol(train) 
   colnames(train)[nf]<-'output' 
@@ -161,6 +195,23 @@ get_pred_logit<-function(train,test,train.review = FALSE){
   pred.df<-data.frame(pred,true_output)
   return(pred.df)
 }
+
+################################################################################
+##
+## Returns data frame (ncol = 3)  containing Rules-Based Classification model 
+## predictions and an indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
+
 
 get_pred_rules<-function(train,test,train.review = FALSE){
   nf<-ncol(train) 
@@ -182,7 +233,23 @@ get_pred_rules<-function(train,test,train.review = FALSE){
   return(pred.df)
 }
 
-#naieve bayes 
+################################################################################
+##
+## Returns data frame (ncol = 3)  containing Naive Bayes model predictions and an 
+## indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
+
+
 get_pred_nb<-function(train,test,train.review = FALSE){
   nf<-ncol(train) 
   colnames(train)[nf]<-'output' 
@@ -199,8 +266,23 @@ get_pred_nb<-function(train,test,train.review = FALSE){
   return(pred.df)  
 }
 
+################################################################################
+##
+## Returns data frame (ncol = 3)  containing Support Vector Machine model 
+## predictions and an indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
 
-#SVM using default linear kernal
+
 get_pred_svm<-function(train,test,train.review = FALSE){
   nf<-ncol(train) 
   colnames(train)[nf]<-'output' 
@@ -217,7 +299,24 @@ get_pred_svm<-function(train,test,train.review = FALSE){
   return(pred.df)  
 }
 
-#KNN
+################################################################################
+## 
+## Returns data frame (ncol = 3)  containing K-Nearest-Neighbor model predictions 
+## and an indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
+
+
+
 get_pred_knn<-function(train,test,k,train.review = FALSE){
   nf<-ncol(train) 
   colnames(train)[nf]<-'output' 
@@ -240,8 +339,23 @@ get_pred_knn<-function(train,test,k,train.review = FALSE){
   return(pred.df)  
 }
 
-# Default predictor model
-# Assumes the last column of data is the output dimension
+################################################################################
+## 
+## Returns data frame (ncol = 3)  containing Default model (mean-based) 
+## predictions and an indicator column for training/testing data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   train <- REQUIRED.  Data frame subset.
+##   test <- REQUIRED.  Data frame subset.
+##   train.review <- FALSE.  May be switched to TRUE when called by do_cv_class to
+##   evaluate model accuracy on training data.
+##
+################################################################################
+
+
 get_pred_default <- function(train,test, train.review = FALSE){
   nf <- ncol(train)
   if(train.review == FALSE) {
@@ -255,6 +369,21 @@ get_pred_default <- function(train,test, train.review = FALSE){
   return(pred.df)
 }
 
+################################################################################
+## 
+## Returns k groups of vectors with nn cumulative length.  Values between 0 and  
+## k-1 are assigned to the nn observations for developing cross-validation folds. 
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   nn <- REQUIRED.  Data length.
+##   k <- REQUIRED.  Number of folds.
+##   
+################################################################################
+
+
 get_folds <- function(nn, k) {
   index <- seq(1, nn)
   rand.index <- sample(index, nn)
@@ -263,9 +392,33 @@ get_folds <- function(nn, k) {
   return(chunk)
 }
 
-#PART 2
-#your implementation of do_cv_class goes here
-do_cv_class <- function(df, output = NULL, k, model_name, review.training.data = FALSE, cutoff = 0.5, folds = NULL) {
+################################################################################
+## 
+##  Returns dataframe with length equal to "df" containing the prediction results 
+##  of "model_name" implementations across "k" cross-validation folds trained on 
+##  "output."  
+##  If review.training.data = TRUE, returns a much longer data frame holding the 
+##  prediction results for the training data.
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   df <- REQUIRED.  Data frame
+##   output <- optional.  Name of the column in "df" containing the prediction 
+##   attribute.
+##   k <- REQUIRED.  Number of cross-validation folds.
+##   model_name <- REQUIRED.  {"*nn", "logreg", "svm", "nb", "default", "rules"}
+##                            * <- input an integer value of k for the K-Nearest 
+##                                 Neighbors model.
+##   review.training.data <- FALSE.  If set to TRUE, returns a much longer data 
+##   frame containing predictions for trainin data.
+##   folds <- optional. If assigned a data frame containing a series of 
+##   cross-validation folds, will not use get_folds().
+##  
+################################################################################
+
+do_cv_class <- function(df, output = NULL, k, model_name, review.training.data = FALSE, folds = NULL) {
   #  if a string was entered for model_name representing knn, parse the entry to
   #  determine the value of k (store as n because we're already using k)
   if(grepl("nn", model_name, ignore.case = TRUE)) {
@@ -320,12 +473,23 @@ do_cv_class <- function(df, output = NULL, k, model_name, review.training.data =
   return(score)
 }
 
+################################################################################
+## 
+## Returns confusion matrix results for a data frame input containing predictions 
+## and true labels against a cutoff value (default = 0.5). 
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   pred <- REQUIRED.  Data frame. Column 1 <- predictions. Column 2 <- True 
+##   outputs.
+##   cutoff <- 0.5  Will change confusion response variables if the prediction 
+##   values are continuous.
+##   
+################################################################################
 
-#PART 3
 
-#input prediction file the first column of which is prediction value
-#the 2nd column is true label (0/1)
-#cutoff is a numeric value, default is 0.5
 get_metrics<-function(pred,cutoff=0.5){
   ### assumes that 1 is "positive" outcome
   pred.bi <- ifelse(pred[,1] > cutoff, 1, 0)
@@ -349,6 +513,21 @@ get_metrics<-function(pred,cutoff=0.5){
                             recall = n11/Pos)
   return(conf_matrix)
 }
+
+################################################################################
+## 
+## Returns confusion matrix results for a data frame input containing predictions 
+##  and true labels obtained from a Rules-Based Classifier. 
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   df <- REQUIRED.  Data frame. Column 1 <- predictions. Column 2 <- True 
+##   outputs.
+##      
+################################################################################
+
 
 get_rules_metrics <-function(df) {
   conf_matrix <- data.frame(tpr = c(NULL), 
@@ -383,6 +562,28 @@ for(i in 0:(length(unique(df$folds))-1)) {
 }
   return(conf_matrix)
 }
+
+
+################################################################################
+## 
+## Returns confusion matrix results and corresponding confidence interval 
+## parameters for a K-Nearest Neighbors classification model.
+## Training and testing data are considered at each value of k for a data frame 
+## input containing predictions and true labels against a cutoff value. 
+## 
+## Returns:  
+##   Object <- data frame 
+##
+## Inputs:
+##   df <- REQUIRED.  Data frame. 
+##   output <- REQUIRED.  Name of column in "df" containing the predicted 
+##   attribute.
+##   num.folds <- REQUIRED.  Number of folds for cross-validation.
+##   k.range <- REQUIRED.  Upper limit of k-values to test, starting at 1.
+##   t.score <- REQUIRED.  T-value corresponding to the confidence interval 
+##   boundaries.
+##   
+################################################################################
 
 get_generalization_summary <-function(df, output, num.folds, k.range, t.score){
   # data frame for storing the 10-folds cross validation results for each value of k for the knn model
@@ -444,9 +645,21 @@ get_generalization_summary <-function(df, output, num.folds, k.range, t.score){
   return(k.metrics.summary)
 }
 
+################################################################################
+## 
+##  Returns values for TPR and FPR at each cutoff point that yields a unique 
+##  result as well as AUC.
+## 
+## 
+## Returns:  
+##   Object <- list
+##
+## Inputs:
+##   pred.data <- REQUIRED.  Data frame. Should take accept the output from 
+##   do_cv_class.
+##   
+################################################################################
 
-# Takes pred.data as the output from do_cv_class, and returns values for 
-# TPR and FPR at each unique cutoff point.  Also returns AUC.
 get_roc<-function(pred.data){
   label<-pred.data[,2]
   if (length(unique(label))>=2){
@@ -462,10 +675,23 @@ get_roc<-function(pred.data){
     return(list(auc=-1,roc=NULL))
   }
 }
-# Cycles through the TPR/FPR pairs, starting with the highest value of TPR !=1.
-# For each step throug hthe ROC data, evaluates if the tradeoff between 
-# performance at the 'optimal' cutoff and the current observed cutoff leads to
-# improved model cost based on the tradeoff input.
+
+################################################################################
+## 
+## Cycles through the TPR/FPR pairs, starting with the highest value of TPR !=1.
+## For each step through the ROC data, evaluates if the tradeoff between 
+## performance at the 'optimal' cutoff and the current observed cutoff leads to
+## improved model cost based on the tradeoff input. Returns the TPR and FPR for the cost-optimal point on the ROC curve.
+## 
+## 
+## Returns:  
+##   Object <- data frame
+##
+## Inputs:
+##   roc.data <- REQUIRED.  Data frame. Should take accept the output from get_roc.
+##   tradeoff <- REQUIRED.  Numeric.
+##   
+################################################################################
 
 optimize_roc <- function(roc.data, tradeoff) {
     
@@ -511,6 +737,34 @@ optimize_roc <- function(roc.data, tradeoff) {
     return(c(df[i - 1, ], i -1))
   }
 }
+
+
+################################################################################
+## 
+## Cycles through the input attributes for the data frame provided, removes each
+## attribute, performs cross-validation on the prediction model, finds the cost-
+## optimal point on the ROC curve, determines if that presents at least a lateral
+## cost-sensitive tradeoff compared to the optimal performance of the full set of 
+## inputs.  Returns a data frame containing the cost-optimal TPR, FPR and AUC
+## for each attribute meeting the cutoff.  Results are ranked in descending order
+## of AUC, then descending order of TPR, then ascending order of FPR.
+## 
+## 
+## Returns:  
+##   Object <- data frame
+##
+## Inputs:
+##   df <- REQUIRED.  Data frame
+##   output <- optional.  Name of the column in "df" containing the prediction 
+##   attribute.
+##   num.folds <- REQUIRED.  Number of cross-validation folds.
+##   model.name <- REQUIRED.  {"*nn", "logreg", "svm", "nb", "default", "rules"}
+##                              * <- input an integer value of k for the K-Nearest
+##                                   Neighbors model.
+##   tpr.fpr.tradeoff <- REQUIRED. Numeric, representing the cost ratio between
+##   false negatives and false positives.
+##   
+################################################################################
 
 backwards_selection <- function(df, output = NULL, num.folds, model.name, tpr.fpr.tradeoff) {
   train.test <- get_folds(length(df[, 1]), num.folds)
@@ -582,6 +836,26 @@ backstep.results <- rbind(backstep.results,
       return()
 }
 
+
+################################################################################
+## 
+## Returns the 1-to-1 correlation coefficients for all inputs against the output.
+## 
+## 
+## Returns:  
+##   Object <- data frame
+##
+## Inputs:
+##   df <- REQUIRED.  Data frame
+##   output <- optional.  Name of the column in "df" containing the prediction 
+##   attribute. If set to NULL, assumes output variable is located in the last column.
+##   top <- optional.  If an integer is input, the output will include a column
+##   indicating if each observation is among the top-x highest-magnitude positive
+##   correlation coefficients.
+##   
+################################################################################
+
+
 filter.features.by.cor <- function(df, output = NULL, top = NULL) {
   cor.df <- NULL
   if(!is.null(output)) {
@@ -605,6 +879,8 @@ filter.features.by.cor <- function(df, output = NULL, top = NULL) {
     }
     return(cor.df)
 }
+
+#To organize many plots that are intended to be grouped together, I am using the #multiplot function obtained here:  #http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   library(grid)
@@ -789,7 +1065,7 @@ There are also distinct patterns in the measures of Duration, Source Bytes and D
 
 
 ```r
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic <- droplevels(net_traffic)
 net_traffic <- transform(net_traffic,
@@ -846,7 +1122,7 @@ Our hypothesis is that combinations of these attributes will identify patterns t
 
 
 
-## Method and Result {.tabset .tabset-fade .tabset-pills}
+## Method and Result 
 
 
 
@@ -855,7 +1131,7 @@ Our hypothesis is that combinations of these attributes will identify patterns t
 
 ```r
 ## I want to clear the formatting that I applied previously w.r.t. re-labeling binary choices with symbolic respresentations (for the purpose of some of these models, the binary respresentation is better).
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic[which(net_traffic$is_intrusion == "0="), "is_intrusion"] <- 0
 net_traffic <- droplevels(net_traffic)
@@ -1114,7 +1390,7 @@ For a next step, we will look into feature reduction using Principal Component A
 
 
 ```r
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic <- droplevels(net_traffic)
 net_traffic <- transform(net_traffic,
@@ -1409,7 +1685,7 @@ The magnitudes of negative weights are much more significant within component Y2
 
 
 ```r
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic <- droplevels(net_traffic)
 net_traffic <- transform(net_traffic,
@@ -1804,7 +2080,7 @@ These accuracy results do not show significant improvement over the models using
 ### Clustering
 
 ```r
-net_traffic <- read.csv("C:/Users/nicho/OneDrive/Documents/CMU/Data Mining/Project/Summary and Data/network_traffic.csv", header=TRUE)
+net_traffic <- read.csv("network_traffic.csv", header=TRUE)
 net_traffic <- net_traffic[complete.cases(net_traffic), ]
 net_traffic[which(net_traffic$is_intrusion == "0="), "is_intrusion"] <- 0
 net_traffic <- droplevels(net_traffic)
@@ -1875,7 +2151,7 @@ Based on related research, we expected to be able to identify patterns associate
 
 *Remote to Local Attack (R2L):*  An attack which attackers exploit vulnerabilities by sending packets to target machines through a network to imitate local users in order to access that machine. 
 
-[@zhou2017]
+[Zhou, 2017]
 
 
 
@@ -2091,7 +2367,7 @@ There is significant overlap in the Protocols, Services and Flags observed withi
 **Cluster 2:**  Possible components of probing attacks that could involve attempet to access protected webpages. Packets averaging 0 bytes are sent to and from XYZ Bank using TCP over an http connection of short duration, exclusively associated with an S0 flag.  
 
 
-**Cluster 3:**  Possible components of Denial of Service attacks. Large packets are sent to XYZ Bank and receive small packets in response.  These network sessions use TCP over an http connection for a duration of approximately 20 minutes, and are most commonly associated with a RSTR flag [@houle2001].  This would need to be analyzed in the context of other, similar sessions occuring in large numbers around the same time to positively identify a Denial of Service attempt.
+**Cluster 3:**  Possible components of Denial of Service attacks. Large packets are sent to XYZ Bank and receive small packets in response.  These network sessions use TCP over an http connection for a duration of approximately 20 minutes, and are most commonly associated with a RSTR flag [Houle, 2001].  This would need to be analyzed in the context of other, similar sessions occuring in large numbers around the same time to positively identify a Denial of Service attempt.
 
 
 **Cluster 4:**  Possible examples of data extraction performed by an attacker who has already gained access to the system, perhaps involving account numbers. Packets averaging 0 bytes are sent to XYZ Bank and receive small packets averaging 12 bytes in response.  These network sessions use TCP over an ftp-data connection of short duration, and are exclusively associated with an SF flag.  
@@ -2140,7 +2416,9 @@ The classification model should be monitored to ensure that it is meeting accept
 
 -- Profile the currently deployed model for possible bottlenecks in the code, server, or other elements supporting model deployment.
 --  Make adjustments to system to address identified bottlenecks.
+
 *If the model accuracy is a concern:*
+
 --  Re-train the model and perform feature selection, adhering to strict version-control principles.  
 --  Perform testing on historical data and live data, if possible.
 --  Perform clustering, compare new results to the previous understanding and search for signs of new attack patterns.
@@ -2164,8 +2442,6 @@ XYZ staff can use our cluster analysis to review logs from network devices that 
 
 Our execution was strong - 98% positive identification of intrusions will help the XYZ Bank IT staff respond appropriately to the threats facing its network - but perhaps a greedy-algorithm solution for feature selection would have had more success in enhancing our model accuracy than Principal Component Analysis.  Also, a systematic approach to testing input factors to enhance the fit of the Rule-Based Classifier may improve that model's performance.  More complex models may be more successful in classifying network sessions in a live environment, especially as new attributes are added that relate to tracking sequential network sessions.
 
-Our team brought together domain expertise related to information security and IT practices that enabled us to infer likely network intrusion strategies thanks to Alejandro's significant professional experience, and Scott was able to develop algorithms and data manipulation techniques that uncovered important signals in the data.
-
 General Suggestions to teams or individuals who will be working on similar projects:
 
 1. Collaboration:  It is highly recommended that the team or individual working on a project establishes a simple communciation protocol (email, phone calls, video chats, etc.) in order to communicate effectively in the case that a team is working on the project. Also establish a regular schedule of when the team has to meet in ordert to discuss progress.
@@ -2177,3 +2453,15 @@ General Suggestions to teams or individuals who will be working on similar proje
 
 ## References
 
+
+
+A Dimension Reduction Model and Classifier for Anomaly-Based Intrusion Detection
+in Internet of Things.  Zhao Shengchu, et al.  IEEE.  November 6, 2017.                 https://ieeexplore-ieee-org.proxy.library.cmu.edu/stamp/stamp.jsp?tp=&arnumber=8328485&tag=1
+
+
+base/protocols/conn/main.bro.  BRO Network Security Monitor.  April 19, 2018.  
+      https://www.bro.org/sphinx/scripts/base/protocols/conn/main.bro.html
+
+
+Trends in Denial of Service Attack Technology.  Houle, Kevin J. and Weaver, George M.  SEI.  October, 2001.                              
+      https://resources.sei.cmu.edu/asset_files/WhitePaper/2001_019_001_52491.pdf
