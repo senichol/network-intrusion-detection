@@ -56,6 +56,7 @@ library(stringr)
 library(ROCR)
 library(class)
 library(arulesCBA)
+library(latexpdf)
 ```
 
 ## Abstract
@@ -2170,7 +2171,7 @@ There is significant overlap in the Protocols, Services and Flags observed withi
 
 *RSTR:*  Responder sent an RST (restore) flag.
 
-[@broprotocols]
+(BRO Network Security Monitor, 2018)
 
 
 **Cluster 1:**  Possible evidence of data extraction.  Large packets are sent from the bank's network in response to small packets. These network sessions use UDP over private connections, have very short durations, and are exclusively associated with an SF flag.

@@ -1549,17 +1549,17 @@ print(k.metrics)
 ```
 
 ```
-##    tpr        fpr       acc  precision recall
-## 1    1 0.08474576 0.9166667 0.16666667      1
-## 2    1 0.06101695 0.9400000 0.21739130      1
-## 3    1 0.06462585 0.9366667 0.24000000      1
-## 4  NaN 0.10333333 0.8966667 0.00000000    NaN
-## 5  NaN 0.11000000 0.8900000 0.00000000    NaN
-## 6  NaN 0.11000000 0.8900000 0.00000000    NaN
-## 7  NaN 0.12333333 0.8766667 0.00000000    NaN
-## 8    1 0.08695652 0.9133333 0.03703704      1
-## 9    1 0.08474576 0.9166667 0.16666667      1
-## 10 NaN 0.10333333 0.8966667 0.00000000    NaN
+##    tpr        fpr       acc precision recall
+## 1  NaN 0.10666667 0.8933333 0.0000000    NaN
+## 2    1 0.08445946 0.9166667 0.1379310      1
+## 3  NaN 0.11000000 0.8900000 0.0000000    NaN
+## 4  NaN 0.10666667 0.8933333 0.0000000    NaN
+## 5  NaN 0.10333333 0.8966667 0.0000000    NaN
+## 6    1 0.07432432 0.9266667 0.1538462      1
+## 7  NaN 0.13000000 0.8700000 0.0000000    NaN
+## 8    1 0.05016722 0.9500000 0.0625000      1
+## 9  NaN 0.11000000 0.8900000 0.0000000    NaN
+## 10   1 0.08445946 0.9166667 0.1379310      1
 ```
 
 
@@ -2358,7 +2358,7 @@ There is significant overlap in the Protocols, Services and Flags observed withi
 
 *RSTR:*  Responder sent an RST (restore) flag.
 
-[@broprotocols]
+(BRO Network Security Monitor, 2018)
 
 
 **Cluster 1:**  Possible evidence of data extraction.  Large packets are sent from the bank's network in response to small packets. These network sessions use UDP over private connections, have very short durations, and are exclusively associated with an SF flag.
